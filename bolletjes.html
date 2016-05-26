@@ -1,0 +1,31 @@
+<script src="reader.js"></script>
+<script src="math.js"></script>
+<script src="graphics.js"></script>
+<script src="handleEvents.js"></script>
+<script src="objects.js"></script>
+<script src="main.js"></script>
+<objects>
+
+</objects>
+<script>
+    sky_color = new Color(200,200,200);
+
+    player.y = -15;
+
+    objects.push(new Punt(0,0,0,new Color(200,0,0),true));
+    objects[0].x_speed = 0, objects[0].y_speed = 0, objects[0].z_speed = 0;
+
+    var l = 0;
+    setInterval(function() {
+        ++l;
+        for(var i = 0, len = objects.length; i < len; ++i) {
+            objects[i].lx += objects[i].x_speed, objects[i].ly += objects[i].y_speed, objects[i].lz += objects[i].z_speed;
+
+            if (l % 50 == 0) objects[i].x_speed = Math.random() * .1 - .05, objects[i].y_speed = Math.random() * .1 - .05, objects[i].z_speed = Math.random() * .1 - .05;
+            if (l % 50 == 0 && objects.length < 5000) {
+                objects.push(new Punt(objects[i].lx, objects[i].ly, objects[i].lz, new Color(200, 0, 0), true));
+                objects[objects.length - 1].x_speed = Math.random() * .1 - .05, objects[objects.length - 1].y_speed = Math.random() * .1 - .05, objects[objects.length - 1].z_speed = Math.random() * .1 - .05;
+            }
+        }
+    }, 17);
+</script>

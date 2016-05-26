@@ -1,0 +1,34 @@
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+<script src="reader.js"></script>
+<script src="math.js"></script>
+<script src="graphics.js"></script>
+<script src="handleEvents.js"></script>
+<script src="objects.js"></script>
+<script src="main.js"></script>
+<script>
+    sky_color = new Color(50,50,50);
+    
+    // functie om een boom op een bepaalde plaats neer te zetten
+    function boom(x,y) {
+        // stam maken: een bruine kubus
+        var stam = new Kubus(x,y,0,.1,.1,.5,new Color(150,100,50),true);
+        // de top van de boom maken: een groene piramide
+        var top = new Piramide(x,y,2,1,1,1.5,new Color(50,Math.round(Math.random() * 50) + 80,50),true);
+        // objecten toevoegen aan de lijst met alle objecten
+        objects.push(stam);
+        objects.push(top);
+    }
+    
+    // 256 bomen op willekeurige posities plaatsen
+    for(var i = 0; i < 256; ++i) {
+        var x = Math.random() * 100 - 50,
+            y = Math.random() * 100 - 50;
+        boom(x,y);
+    }
+    
+    player.z = .5;
+    fly = false;
+    
+    // let hier niet op, dit is een snelle oplossing voor het probleem met objecten die half uit beeld zijn
+    x = 2; 
+</script>

@@ -1,0 +1,40 @@
+<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300' rel='stylesheet' type='text/css'>
+<script src="reader.js"></script>
+<script src="math.js"></script>
+<script src="graphics.js"></script>
+<script src="handleEvents.js"></script>
+<script src="objects.js"></script>
+<script src="main.js"></script>
+<script>
+    // let hier niet op, dit is een snelle oplossing voor het probleem met objecten die half uit beeld zijn
+    x = .5;
+    
+    // geeft aan dat de score moet worden laten zien
+    showScore = true;
+    
+    // loopsnelheid instellen op 8 m/s
+    walking_speed = 8;
+
+    var speed = 10;
+    setInterval(function() {
+        // elke 80 ms een kubus op een willekeurige plek plaatsen vóór de speler
+        var x = player.x - random(-5,5);
+        var kubus = new Kubus(x,player.y + 10,0,.2,.2,.2,new Color(0,0,0),true);
+        objects.push(kubus);
+        
+        // snelheid heeel langzaam ophogen
+        speed += 0.02;
+    }, 80);
+
+    setInterval(function() {
+        // zorgt voor de voorwaartse snelheid
+        player.velocity_y = speed;
+        
+        // de score is gelijk aan het aantal gepasserde obstakels
+        score = objects.length;
+        if(botstMetType("KUBUS")) {
+            alert("Helaas! Game over!");
+            location.reload();
+        }
+    },1);
+</script>
